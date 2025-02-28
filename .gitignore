@@ -1,3 +1,7 @@
+observablity_tig/
+oncall-netops/
+pyats_server/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
