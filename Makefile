@@ -4,8 +4,7 @@ export
 
 build-repos:
 	git submodule sync --recursive
-	git submodule update --init --recursive
-	git submodule update --remote --merge
+	git submodule update --init --recursive --remote
 
 build-tig:
 	$(MAKE) -C observablity_tig build-tig
