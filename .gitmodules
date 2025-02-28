@@ -1,0 +1,12 @@
+[submodule "oncall-netops"]
+	path = oncall-netops
+	url = git@github.com:jillesca/oncall-netops.git
+  branch = main
+[submodule "pyats_server"]
+	path = pyats_server
+	url = git@github.com:jillesca/pyats_server.git
+  branch = main
+[submodule "observablity_tig"]
+	path = observablity_tig
+	url = git@github.com:jillesca/observablity_tig.git
+  branch = main
