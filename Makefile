@@ -29,3 +29,8 @@ build-demo:
 	$(MAKE) build-pyats-server
 	$(MAKE) build-grafana-to-langgraph-proxy
 	$(MAKE) set-env-var-oncall-netops
+
+run-environment:
+	$(MAKE) -C oncall-netops build-environment
+	$(MAKE) -C oncall-netops build-proxy
+	$(MAKE) -C oncall-netops run-environment
