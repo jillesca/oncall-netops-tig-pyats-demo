@@ -114,15 +114,22 @@ make run-environment
 
 ```bash
 ❯ make run-environment
-langgraph up --port 56000 --watch --recreate
-Starting LangGraph API server...
-For local dev, requires env var LANGSMITH_API_KEY with access to LangGraph Cloud closed beta.
-For production use, requires a license key in env var LANGGRAPH_CLOUD_LICENSE_KEY.
-- Pulling...Error response from daemon: get langgraph-data: no such volume
-Ready!
-- API: http://localhost:56000
-- Docs: http://localhost:56000/docs
-- LangGraph Studio: https://smith.langchain.com/studio/?baseUrl=http://127.0.0.1:56000
+langgraph dev --port 56000
+WARNING:langgraph_api.cli:python_dotenv is not installed. Environment variables will not be available.
+INFO:langgraph_api.cli:
+
+        Welcome to
+
+╦  ┌─┐┌┐┌┌─┐╔═╗┬─┐┌─┐┌─┐┬ ┬
+║  ├─┤││││ ┬║ ╦├┬┘├─┤├─┘├─┤
+╩═╝┴ ┴┘└┘└─┘╚═╝┴└─┴ ┴┴  ┴ ┴
+
+- 🚀 API: http://127.0.0.1:56000
+- 🎨 Studio UI: https://smith.langchain.com/studio/?baseUrl=http://127.0.0.1:56000
+- 📚 API Docs: http://127.0.0.1:56000/docs
+
+This in-memory server is designed for development and testing.
+For production use, please use LangGraph Cloud.
 ```
 
 </details>
