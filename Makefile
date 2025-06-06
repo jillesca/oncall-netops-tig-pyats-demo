@@ -34,3 +34,9 @@ run-environment:
 	$(MAKE) -C oncall-netops build-environment
 	$(MAKE) -C oncall-netops build-proxy
 	$(MAKE) -C oncall-netops run-environment
+
+remove-environment:
+	$(MAKE) -C oncall-netops clean-proxy
+	$(MAKE) -C observablity_tig clean-tig
+	$(MAKE) -C pyats_server stop-container
+
