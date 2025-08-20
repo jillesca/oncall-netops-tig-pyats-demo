@@ -36,7 +36,8 @@ Network agents:
 
 ## Requirements ⚠️
 
-- **Python 3.11** (Only for the _Langgraph Studio Desktop_ version).
+- **[uv](https://docs.astral.sh/uv/getting-started/installation/)**: Fast Python package manager and project manager. Required to run the LangGraph server.
+- **Python 3.11+**
 - **Docker >=1.27**
 - **Make**
 - **OpenAI Key**
@@ -78,30 +79,27 @@ OPENAI_API_KEY=<openai_token>
 
 ## Run Langgraph
 
-There are two options to run the graph:
+> [!NOTE] > **Update**: LangGraph Studio Desktop has been discontinued by LangChain. The only available option is now the LangGraph Server CLI with the web-based Studio interface.
 
-1. **Langgraph Server CLI**: Run the server in the terminal without a container. You can use the web version of Langgraph Studio (a bit slower).
-2. **Langgraph Studio Desktop**: Desktop version (only for Mac).
+Use the LangGraph Server CLI to run the server in the terminal. You can access the web version of LangGraph Studio through your browser.
 
 ### Review Environment Variables
 
-- `PYATS_API_SERVER`: This variable connects the Langgraph API server to the pyATS server. It defaults to `http://host.docker.internal:57000`. **Note** that the demo _assumes_ you're running the Langgraph server in a container, so adjust this value ([see .env.example](.env.example#L5)) if needed. Default port for the pyATS server is `57000`.
-- `LANGGRAPH_API_HOST`: Links the `grafana-to-langgraph-proxy` with the Langgraph API server. Defaults to `http://host.docker.internal:56000`, [adjust](https://github.com/jillesca/oncall-netops/blob/main/.env.example#L4) if needed.
-
-If you need to adjust these environment variables, use the table below.
-
-| Scenario                                                                                                         | Variable             | Value                              |
-| ---------------------------------------------------------------------------------------------------------------- | -------------------- | ---------------------------------- |
-| `grafana-to-langgraph-proxy`, pyATS Server, and Langgraph API Server on the same host. Langgraph in a container. | `PYATS_API_SERVER`   | `http://host.docker.internal:PORT` |
-|                                                                                                                  | `LANGGRAPH_API_HOST` | `http://host.docker.internal:PORT` |
-| `grafana-to-langgraph-proxy`, pyATS Server, & Langgraph API Server on different hosts or not in containers       | `PYATS_API_SERVER`   | `http://<HOST_IP:PORT>`            |
-|                                                                                                                  | `LANGGRAPH_API_HOST` | `http://<HOST_IP:PORT>`            |
+- `PYATS_API_SERVER`
+  - This variable connects the Langgraph API server to the pyATS server.
+  - Defaults to `http://localhost:57000`.
+  - Adjust this value ([see .env.example](.env.example#L5)) if needed.
+  - Default port for the pyATS server is `57000`.
+- `LANGGRAPH_API_HOST`
+  - Links the `grafana-to-langgraph-proxy` with the Langgraph API server.
+  - Defaults to `http://host.docker.internal:56000`,
+  - [Adjust](https://github.com/jillesca/oncall-netops/blob/main/.env.example#L4) if needed.
 
 See the [.env.example](.env.example) file for the rest of the environment variables used. These are set by the [Makefile](Makefile).
 
-### Option 1: Langgraph Server CLI 💻
+### Running LangGraph Server CLI 💻
 
-Install the dependencies listed in the [requirements file](https://github.com/jillesca/oncall-netops/blob/main/requirements.txt), using a virtual environment if possible.
+Dependencies are automatically managed by `uv` during the build process.
 
 Start the server with:
 
@@ -134,33 +132,12 @@ For production use, please use LangGraph Cloud.
 
 </details>
 
-Open the LangGraph Studio URL using Chrome (Firefox doesn't work).
-
 If you have issues with the web version, make sure:
 
 - You are logged in to Langsmith.
 - Refresh your browser.
 
 If you don't want to use the web version, you can still see the operations in the terminal, but it is hard to follow and interact with due to the amount of output.
-
-### Option 2: Langgraph Studio Desktop 🍏
-
-[Download the desktop version](https://studio.langchain.com/) (only for Mac).
-
-**Before** you start opening the project, **set the target port** in the bottom bar. This project uses port `56000`. If you set a different one, update the environment variable [LANGGRAPH_API_PORT](https://github.com/jillesca/oncall-netops/blob/main/.env.example#L2).
-
-<p align="center">
-  <img src="img/select_port.png" alt="Select port" width="300">
-<p>
-
-On Langgraph Studio, select this project and open it. This imports the code from this repo and installs everything in a dedicated container.
-
-<p align="center">
-  <img src="img/open_project.png" alt="Select project" width="300">
-<p>
-
-> [!NOTE]
-> Sometimes the build process fails. Restart or retry.
 
 ## Run
 
@@ -192,24 +169,9 @@ Here you can see the traces from one execution of the demo. There you can find s
 - Graph triggered by an automatic alert: [Trace](https://smith.langchain.com/public/42aac689-24a7-4a85-95b4-666c240d2c5b/r)
 - Graph triggered by a user request following up on the alert: [Trace](https://smith.langchain.com/public/e034429e-6b20-4da0-bd74-25034fbdc243/r)
 
-## FAQ
+### Useful resources 📚
 
-A common error with Langgraph Studio is when you restart the server and orphan containers from another Langgraph instance are still running, causing the server to fail.
-
-If you have this problem, see orphan containers with:
-
-```bash
-docker ps --filter "name=oncall-netops"
-```
-
-Remove them with:
-
-```bash
-docker ps --filter "name=oncall-netops" --format "{{.ID}}" | xargs docker rm -f
-```
-
-Restart Langgraph Studio.
-
-## Additional Resources
-
+- [Building effective agents by Anthropic](https://www.anthropic.com/research/building-effective-agents)
+- [Course. Introduction to LangGraph](https://academy.langchain.com/courses/intro-to-langgraph)
+- [Scientific paper agent using LangGraph](https://github.com/NirDiamant/GenAI_Agents/blob/main/all_agents_tutorials/scientific_paper_agent_langgraph.ipynb)
 - [Previous demo with only one agent](https://github.com/jillesca/AI-Network-Troubleshooting-PoC)
