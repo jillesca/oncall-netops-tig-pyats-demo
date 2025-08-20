@@ -79,7 +79,8 @@ OPENAI_API_KEY=<openai_token>
 
 ## Run Langgraph
 
-> [!NOTE] > **Update**: LangGraph Studio Desktop has been discontinued by LangChain. The only available option is now the LangGraph Server CLI with the web-based Studio interface.
+> [!NOTE]
+> Update: LangGraph Studio Desktop has been discontinued by LangChain. The only available option is now the LangGraph Server CLI with the web-based Studio interface.
 
 Use the LangGraph Server CLI to run the server in the terminal. You can access the web version of LangGraph Studio through your browser.
 
